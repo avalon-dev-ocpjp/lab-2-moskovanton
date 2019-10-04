@@ -1,4 +1,4 @@
-package ru.avalon.java.ocpjp.labs;
+package ru.avalon.java;
 
 /**
  * Обрабатываемые приложением команды.
@@ -6,9 +6,9 @@ package ru.avalon.java.ocpjp.labs;
 public enum Commands {
     move,
     copy,
-    exit,
-    create,
-    delete
+    delete,
+    rename,
+    exit
     /*
      * TODO №8 К текущему списку команд, добавьте ещё две команды
      */
