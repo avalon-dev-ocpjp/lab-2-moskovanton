@@ -1,4 +1,4 @@
-package ru.avalon.java.ocpjp.labs.console;
+package ru.avalon.java.console;
 
 import java.io.*;
 

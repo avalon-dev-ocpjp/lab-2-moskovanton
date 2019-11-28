@@ -1,42 +1,49 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package ru.avalon.java.ocpjp.labs.actions;
+package ru.avalon.java.actions;
 
-import java.io.File;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 
 /**
- *
- * @author JAVA
+ * Действие, которое удаляет файлы в пределах дискового
+ * пространства.
  */
-public class FileDeleteAction implements Action{
+public class FileDeleteAction implements Action {
+    /**
+     * {@inheritDoc}
+     */
+    private final Path deleteFrom;
 
-     String file = "Exam808_SampleQuestion.pdf";
-    String path = "D:\\Users\\Bozhenkov\\lab2\\";
-    public void delete(){
-        
-        File f = new File(path, file);
-        if(f.isFile()){
-        boolean deleted = f.delete();
-        if(deleted)
-            System.out.println("File deleted");
+    public FileDeleteAction(String deleteFrom) throws IOException {
+        this.deleteFrom = Paths.get(deleteFrom);
+    }
+    
+    private synchronized void delete() throws IOException {
+
+        if (!Files.exists(deleteFrom)) {
+            System.out.println("Файл не найден.");
         } else {
-            System.out.println("File not found");
+            Files.delete(deleteFrom);
+            System.out.println("Файл удален.");
         }
     }
     
     @Override
     public void run() {
-        delete();
-        
-      
+        try {
+            delete();
+        } catch (IOException e) {
+            System.out.println("Удаление не удалось: " + e.getMessage() + ".");  
+        }
+        System.out.print("> ");
     }
 
     @Override
     public void close() throws Exception {
-        
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
 }
